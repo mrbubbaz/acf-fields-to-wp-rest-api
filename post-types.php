@@ -28,6 +28,15 @@ function acf2api_hook_all_post_types(){
       if ($fields){
         //Loop through them...
         foreach ($fields as $field_name => $value){
+
+
+          foreach($value[0]['hp_s_posts'] as $relatedPost)
+          {
+            $relatedPost->permalink = get_permalink($relatedPost->ID);
+            $relatedPost->attachment = get_the_post_thumbnail_url($relatedPost->ID);
+//            $relatedPost['attachment'] = wp_attac($relatedPost['ID']);
+          }
+
           //Set the meta
           $response_data[$field_name] = $value;
         }
