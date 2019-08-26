@@ -32,8 +32,11 @@ function acf2api_hook_all_post_types(){
 
           foreach($value[0]['hp_s_posts'] as $relatedPost)
           {
-            $relatedPost->permalink = get_permalink($relatedPost->ID);
-            $relatedPost->attachment = get_the_post_thumbnail_url($relatedPost->ID);
+            $user_info = get_userdata(intval($relatedPost->post_author));
+            $relatedPost -> post_author_name = $user_info->user_firstname . " " . $user_info->user_lastname;
+
+            $relatedPost -> permalink = get_permalink($relatedPost->ID);
+            $relatedPost -> attachment = get_the_post_thumbnail_url($relatedPost->ID);
 //            $relatedPost['attachment'] = wp_attac($relatedPost['ID']);
           }
 
